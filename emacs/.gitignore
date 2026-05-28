@@ -1,0 +1,63 @@
+# -*- mode: gitignore; -*-
+
+# I decided that custom should be local for each machine
+custom.el
+
+
+# org
+.org-generic-id-locations
+.org-id-locations
+
+.\#*
+network-security.data
+oauth2-auto.plist
+tramp
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+*.eld
+auto-save-list
+
+# eshell
+/eshell/history
+/eshell/lastdir
+
+# directories
+games/
+emms/
+eln-cache/
+auto-save-list/
+newsticker/
+org-persist/
+persist/
+transient/
+url/
+request/
+
+# EIEIO
+srecode-map.el
+
+# eshell files
+/eshell/history
+/eshell/lastdir
+
+# elpa packages
+/elpa/
+
+session.*
+
+# nov epub reader
+nov-places
+places
+
+# rmsbolt and bearbolt
+beardbolt-sandbox/
+compiler-explorer
+
+# eww
+eww-bookmarks
+
+projects
+
