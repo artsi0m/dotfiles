@@ -25,25 +25,17 @@
     (backup-directory-alist `(("." . "~/.cache/emacs/backups")))
     (backup-by-copying t))
 
-(require 'package)
-(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
 
-(setq package-archive-priorities
-  '(("gnu" . 40)
-    ("nongnu" . 30)
-    ("melpa" . 20)))
-
-(use-package reverse-im
-  :ensure t
-  :init (reverse-im-mode)
-  :custom
-  (reverse-im-input-methods '("cyrillic-colemak"))
-  (reverse-im-cache-file "~/.cache/emacs/reverse-im-cache.el")
-  :pin melpa)
+;; (use-package reverse-im
+;;   :ensure t
+;;   :init (reverse-im-mode)
+;;   :custom
+;;   (reverse-im-input-methods '("cyrillic-colemak"))
+;;   (reverse-im-cache-file "~/.cache/emacs/reverse-im-cache.el"))
 
 
+(use-package frames-only-mode
+  :bind ("C-x 5 9" . frames-only-mode))
 
 (use-package ispell
   :commands (ispell ispell-region ispell-word)
