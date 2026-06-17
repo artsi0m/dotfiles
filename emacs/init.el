@@ -75,23 +75,22 @@
 	     (apply (if vertico-mode
 			   #'consult-completion-in-region
 		      #'completion--in-region)
-		    args)))
-     :ensure t)
+		    args))))
 
 (use-package consult :ensure t)
 
 (use-package consult-eglot :commands (eglot) :ensure t)
 (use-package dired
   :custom (dired-dwim-target t))
-(use-package magit :commands (magit) :ensure t)
+
+(use-package magit :commands (magit))
 
 (use-package git-modes :ensure t)
 (use-package howm
   :init (when (not (eq system-type 'windows-nt))
           (setq howm-view-use-grep t))
   :custom
-  (howm-search-other-dir t)
-  :ensure t)
+  (howm-search-other-dir t))
 
 
 (use-package howm-use-any-markup
@@ -167,36 +166,39 @@
 (use-package pyvenv
   :commands (pyvenv-activate pyvenv-workon))
 
-(use-package pydoc :ensure t)
-(use-package slime :commands (slime))
+(use-package pydoc);; app-emacs/pydoc::melpa
+(use-package slime :commands (slime)) ;; app-emacs/slime::akater
 
 (when (executable-find "sbcl")
-(setq inferior-lisp-program "sbcl"))
-(use-package yaml-mode)
+  (setq inferior-lisp-program "sbcl"))
 
-(use-package flymake-yamllint
+
+(use-package yaml-mode) ;; app-emacs/yaml-mode::gentoo
+
+(use-package flymake-yamllint ;; app-emacs/flymake-yamllint::artsi0m
   :when (executable-find "yamllint")
-  :hook (yaml-mode . flymake-yamllint-setup)
-  :ensure t)
+  :hook (yaml-mode . flymake-yamllint-setup)) 
 
-(use-package docker-compose-mode)
+;; (use-package docker-compose-mode)
 
-(use-package ansible
-    :hook (ansible-mode . whitespace-mode)
-    :ensure t)
+;; (use-package ansible
+;;     :hook (ansible-mode . whitespace-mode)
+;;     :ensure t)
 
-(use-package flymake-ansible-lint
-  :when (executable-find "ansible-lint")
-  :ensure t
-  :commands flymake-ansible-lint-setup
-  :hook (((ansible-mode) . flymake-ansible-lint-setup)
-         ((ansible-mode) . flymake-mode)))
+;; (use-package flymake-ansible-lint
+;;   :when (executable-find "ansible-lint")
+;;   :ensure t
+;;   :commands flymake-ansible-lint-setup
+;;   :hook (((ansible-mode) . flymake-ansible-lint-setup)
+;;          ((ansible-mode) . flymake-mode)))
 
-(use-package ansible-doc
-  :hook (ansible-mode . ansible-doc-mode))
+;; (use-package ansible-doc
+;;   :hook (ansible-mode . ansible-doc-mode))
 
+(require 'cl-macs)
 (require 'sudo-edit)
 (require 'portage)
+(require 'akater-conf)
 
 (use-package ctable :ensure nil :defer t
   :config
