@@ -57,7 +57,7 @@
 (global-visual-line-mode)
 
 (use-package modus-themes
-  :init (load-theme 'modus-operandi)
+  :init (modus-themes-load-random-light)
   :when (not (eq window-system nil)))
 ;; Press C-M-i to activate emacs autocomplete.
 
