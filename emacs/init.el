@@ -26,12 +26,14 @@
     (backup-by-copying t))
 
 
-;; (use-package reverse-im
-;;   :ensure t
-;;   :init (reverse-im-mode)
-;;   :custom
-;;   (reverse-im-input-methods '("cyrillic-colemak"))
-;;   (reverse-im-cache-file "~/.cache/emacs/reverse-im-cache.el"))
+(use-package reverse-im
+  ;; depends on
+  ;; app-emacs/seq::gnu-elpa
+  :ensure t
+  :init (reverse-im-mode)
+  :custom
+  (reverse-im-input-methods '("cyrillic-colemak"))
+  (reverse-im-cache-file "~/.cache/emacs/reverse-im-cache.el"))
 
 
 (use-package frames-only-mode
