@@ -86,6 +86,7 @@
 (use-package magit :commands (magit))
 
 (use-package git-modes :ensure t)
+
 (use-package howm
   :init (when (not (eq system-type 'windows-nt))
           (setq howm-view-use-grep t))
@@ -96,6 +97,50 @@
 (use-package howm-use-any-markup
   :vc (:url "https://github.com/artsi0m/howm-use-any-markup")
   :ensure t)
+
+(defconst my-howm-subsubdir-regexp
+  (rx (seq "howm/" (= 4 num ) "/" (= 2 num)))
+  "Regexp that matches second level of subdirectories in howm,
+   like  ~/homw/2024/01/, but with ltximg")
+
+(defconst my-howm-excluded-subdirs-regexp
+  (rx (or ".git" "ltximg"))
+  "Regexp that matches howm subdirs that I don't need
+   like .git .elfeed and ltximg, basically like .gitignore,
+   but i don't want to rely on them")
+
+(defun my-howm-subsubdir-exclude (dir)
+  (if (string-match-p my-howm-subsubdir-regexp dir)
+      (unless
+	  (string-match-p my-howm-excluded-subdirs-regexp dir) dir)
+    nil))
+
+(defun my-howm-subsubdirs ()
+  (thread-last
+    (directory-files-recursively
+     howm-directory directory-files-no-dot-files-regexp t)
+    (seq-filter #'file-directory-p)
+    (seq-filter #'my-howm-subsubdir-exclude)))
+
+(use-package org-fc
+  :load-path "~/Projects/org-fc"
+  :custom
+  (org-fc-directories (my-howm-subsubdirs))
+  (org-fc-review-history-file "~/howm/.org-fc-reviews.tsv")
+  :config
+
+  (defun org-fc-awk--find (paths)
+    "Original org-fc-awk--find modified for use with .txt files"
+    (format
+     "find -L %s -type f -name \"*.txt\" -not -name \".*\"  -print0" ;;
+     (mapconcat  (lambda (path)
+		   (shell-quote-argument (expand-file-name path)))
+                 paths " ")))
+
+  (setq org-fc-default-algo 'fsrs6)
+  (require 'org-fc-hydra)
+  (require 'org-fc-algo-fsrs))
+
 
 ;; Use C locale for time. Needed for org-pomodoro on windows.A
 (setq system-time-locale "C")
