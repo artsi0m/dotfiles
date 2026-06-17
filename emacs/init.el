@@ -285,23 +285,48 @@
   (gnus-startup-file "~/howm/.newsrc")
   (gnus-backup-startup-file 'never)
   (gnus-select-method '(nnnil nil))
-  (nnrss-use-local t)
   (gnus-use-cache t)
   :init
+  (setq nnrss-use-local t)
   (add-to-list 'gnus-secondary-select-methods
 	       '(nnimap "gmail"
 			(nnimap-address "imap.gmail.com")
-	      (nnmail-expiry-target "nnimap+gmail:[Gmail]/Корзина")
-	      (nnimap-server-port 993)
-	      (nnimap-stream ssl)
-	      (nnir-search-engine imap)
-	      (nnmail-expiry-wait immediate)))
+			(nnmail-expiry-target "nnimap+gmail:[Gmail]/Корзина")
+			(nnimap-server-port 993)
+			(nnimap-stream ssl)
+			(nnir-search-engine imap)
+			(nnmail-expiry-wait immediate)))
   (add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
   (add-to-list 'gnus-secondary-select-methods '(nntp "news.gmane.io"))
   (add-to-list 'gnus-secondary-select-methods '(nntp "news.eternal-september.org"))
   (add-to-list 'gnus-secondary-select-methods
-      '(nntp "feedbase"
-             (nntp-open-connection-function nntp-open-tls-stream) ; feedbase does not do STARTTLS (yet?)
-             (nntp-port-number 563) ; nntps
-             (nntp-address "feedbase.org")))
+	       '(nntp "feedbase"
+		      (nntp-open-connection-function nntp-open-tls-stream) ; feedbase does not do STARTTLS (yet?)
+		      (nntp-port-number 563) ; nntps
+		      (nntp-address "feedbase.org")))
   (delete-dups gnus-secondary-select-methods))
+
+(use-package telega
+  :custom
+  (telega-debug 't)
+  (telega-chat-send-message-on-ret "ignore")
+  :bind ("C-<return>" . telega-chatbuf-input-send)
+  :commands (telega)
+  :config
+  (setq telega-use-tracking-for '(or unmuted mention))
+  (setq telega-notifications-method 'notifications)
+  (setq telega-notifications-play-sound t
+        telega-notifications-play-command "ffplay -nodisp -autoexit"
+	telega-notifications-sound-file "/usr/share/sounds/freedesktop/stereo/message.oga")
+
+  (define-key global-map (kbd "C-c t") telega-prefix-map)
+  :hook (telega-load . telega-notifications-mode)
+  :defer 't)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (python . t)
+   (C . t)
+   (shell . t)))
+
