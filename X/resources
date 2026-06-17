@@ -1,0 +1,26 @@
+Xft.dpi: 192
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
+*.faceName:Iosevka:size=12
+XTerm.vt100.faceName: Iosevka:size=12
+XTerm.vt100.locale: false
+XTerm.vt100.utf8: true
+XTerm.vt100.foreground: white
+XTerm.vt100.background: black
+
+!emacs
+XTerm.vt100.backarrowKey: false
+XTerm.ttyModes: erase ^?
+
+
+Xcursor.size: 32
+Xcursor.theme: gentoo-silver
+
+Emacs.font:Iosevka-12
+Emacs.pane.menubar.font: Iosevka-12
+emacs.fontBackend: xft

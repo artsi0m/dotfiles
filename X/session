@@ -1,0 +1,33 @@
+
+setxkbmap us,by -variant colemak,ru grp:win_space_toggle -option ctrl:nocaps
+
+xrandr --output eDP-1 \
+       --dpi 192 \
+       --scale 1
+
+if [ -x /usr/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
+	eval $(dbus-launch --sh-syntax --exit-with-x11)  
+fi
+
+env XDG_CONFIG_HOME="$HOME/.config" \
+    XDG_CURRENT_DESKTOP="cwm" \
+    GDK_SCALE=2 
+    
+
+xrdb ~/.config/X/resources
+
+slstatus -s | dzen2 -fn "Iosevka" &
+
+xwallpaper --daemon \
+	   --center \
+	   /home/artsi0m/Pictures/Shapoco/91199411_p0.png
+
+picom --backend glx &
+
+eval $(ssh-agent)
+
+systemctl --user start xscreensaver &
+sleep 5 && systemctl --user start xdg-desktop-portal-gtk.service & # Костыль, хуле
+
+
+exec cwm -c ~/.config/cwm/cwmrc
