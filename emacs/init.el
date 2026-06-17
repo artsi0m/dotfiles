@@ -97,60 +97,19 @@
   :vc (:url "https://github.com/artsi0m/howm-use-any-markup")
   :ensure t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Flashcards using org-drill ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package org-drill
-      :pin melpa
-      :ensure t)
-
-
-(defun my-org-drill-file-names-in-howm ()
-  "Return list of absolute filenames of org-drill files in howm"
-  (delete-dups
-   (mapcar #'car (howm-grep "\:drill\:"
-			    (howm-files-in-directory howm-directory)))))
-
-
-(defun my-org-drill-set-scope ()
-  (interactive)
-  (let ((scope-var
-	 (completing-read "Choose scope for org-drill: " (list
-		   "howm"
-		   "file"
-		   "tree"
-		   "file-no-restriction"
-		   "agenda"
-		   "agenda-with-archives"
-		  "directory"))))
-    (if (equal scope-var "howm")
-	(setq org-drill-scope (my-org-drill-file-names-in-howm))
-      (setq org-drill-scope (intern scope-var)))))
-
-
-(define-advice org-drill (:before (&rest _args))
-  (my-org-drill-set-scope))
-
-(define-advice org-drill-cram (:before (&rest _args))
-  (my-org-drill-set-scope))
-
-(defun org-drill-time-to-inactive-org-timestamp (time)
-  "Convert TIME into org-mode timestamp."
-  (format-time-string
-   (concat "[" (cdr org-time-stamp-formats) "]")
-   time))
-
 ;; Use C locale for time. Needed for org-pomodoro on windows.A
 (setq system-time-locale "C")
 
 (use-package org-pomodoro
+;;   depends on
+;; app-emacs/alert::melpa
+;; app-emacs/gntp::melpa
+;; app-emacs/log4e::gentoo ~amd64
   :custom
   (org-pomodoro-keep-killed-pomodoro-time 't)
   (org-pomodoro-length 80)
   (org-pomodoro-short-break-length 15)
-  (org-pomodoro-long-break-length 35)
-  :ensure t)
+  (org-pomodoro-long-break-length 35))
 
 (use-package org-pomodoro-third-time
   :vc (:url "git@github.com:telotortium/org-pomodoro-third-time.git")
