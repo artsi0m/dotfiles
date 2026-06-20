@@ -1,4 +1,5 @@
-
+# -*- mode: sh; -*-
+# hard link to ~/.xsession
 setxkbmap us,by -variant colemak,ru grp:win_space_toggle -option ctrl:nocaps
 
 xrandr --output eDP-1 \
