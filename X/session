@@ -27,7 +27,12 @@ picom --backend glx &
 
 eval $(ssh-agent)
 
+
+
+dunst &
+
 systemctl --user start xscreensaver &
+
 sleep 5 && systemctl --user start xdg-desktop-portal-gtk.service & # Костыль, хуле
 
 
