@@ -141,7 +141,6 @@
   (require 'org-fc-hydra)
   (require 'org-fc-algo-fsrs))
 
-
 ;; Use C locale for time. Needed for org-pomodoro on windows.A
 (setq system-time-locale "C")
 
@@ -317,14 +316,8 @@
   :bind ("C-<return>" . telega-chatbuf-input-send)
   :commands (telega)
   :config
-  (setq telega-use-tracking-for '(or unmuted mention))
-  (setq telega-notifications-method 'notifications)
-  (setq telega-notifications-play-sound t
-        telega-notifications-play-command "ffplay -nodisp -autoexit"
-	telega-notifications-sound-file "/usr/share/sounds/freedesktop/stereo/message.oga")
-
+  (telega-notifications-mode 1)
   (define-key global-map (kbd "C-c t") telega-prefix-map)
-  :hook (telega-load . telega-notifications-mode)
   :defer 't)
 
 (org-babel-do-load-languages
