@@ -274,13 +274,13 @@
 (setopt markdown-command "markdown2")
 
 
-(use-package rfc-mode)
+
 (use-package helm-info)
 
 (use-package nov)
 
 (setq 
-     user-full-name "artsi0m"
+     user-full-name "Artsiom Karakin"
      user-mail-address "karakin2000@gmail.com")
 
 (use-package smtpmail
