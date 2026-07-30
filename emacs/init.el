@@ -144,26 +144,25 @@
 ;; Use C locale for time. Needed for org-pomodoro on windows
 (setq system-time-locale "C")
 
-(defmacro org-pomodoro-use-package (sound-file)
-  `(use-package org-pomodoro
-     ;;   depends on
-     ;; app-emacs/alert::melpa
-     ;; app-emacs/gntp::melpa
-     ;; app-emacs/log4e::gentoo ~amd64
-     :custom
-     (org-pomodoro-keep-killed-pomodoro-time 't)
-     (org-pomodoro-length 80)
-     (org-pomodoro-short-break-length 15)
-     (org-pomodoro-long-break-length 35)
-     (org-pomodoro-format "🍅~%s")
-     (org-pomodoro-play-sounds t)
-     (org-pomodoro-finished-sound-p t)
-     (org-pomodoro-audio-player "ffplay -nodisp -autoexit -i")
-     (org-pomodoro-finished-sound ,sound-file)
-     (org-pomodoro-short-break-sound ,sound-file)
-     (org-pomodoro-long-break-sound ,sound-file)))
-
-(org-pomodoro-use-package "/usr/share/sounds/freedesktop/stereo/complete.oga")
+(use-package org-pomodoro
+  ;;   depends on
+  ;; app-emacs/alert::melpa
+  ;; app-emacs/gntp::melpa
+  ;; app-emacs/log4e::gentoo ~amd64
+  :preface (defvar my-sound-complete
+             "/usr/share/sounds/freedesktop/stereo/complete.oga")
+  :custom
+  (org-pomodoro-keep-killed-pomodoro-time 't)
+  (org-pomodoro-length 80)
+  (org-pomodoro-short-break-length 15)
+  (org-pomodoro-long-break-length 35)
+  (org-pomodoro-format "🍅~%s")
+  (org-pomodoro-play-sounds t)
+  (org-pomodoro-finished-sound-p t)
+  (org-pomodoro-audio-player "ffplay -nodisp -autoexit -i")
+  (org-pomodoro-finished-sound my-sound-complete)
+  (org-pomodoro-short-break-sound my-sound-complete)
+  (org-pomodoro-long-break-sound my-sound-complete))
 
 (use-package org-pomodoro-third-time
   :vc (:url "git@github.com:telotortium/org-pomodoro-third-time.git")
