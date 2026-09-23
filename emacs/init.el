@@ -5,8 +5,8 @@
 (prefer-coding-system 'utf-8-unix)
 
 ;; 2/4 variables set by custom
-(setq custom-file (concat user-emacs-directory "custom.el"))
-(load custom-file 'noerror)
+(load (setq custom-file (file-name-concat user-emacs-directory "custom.el")) 'noerror)
+
 
 ;; 3/4
 
