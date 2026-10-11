@@ -90,7 +90,9 @@
 (use-package howm
   :init (when (not (eq system-type 'windows-nt))
           (setq howm-view-use-grep t))
+  (setq howm-prefix (kbd "C-c ;"))
   :custom
+  ;; Avoid conflicts with Org-mode by changing Howm's prefix from "C-c ,".
   (howm-search-other-dir t))
 
 
