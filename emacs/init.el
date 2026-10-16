@@ -100,6 +100,18 @@
   :vc (:url "https://github.com/artsi0m/howm-use-any-markup")
   :ensure t)
 
+(defun my-org-agenda-file-names-in-howm ()
+  "Return list of absoulute filenames of files with :agenda: tag in howm"
+  (delete-dups
+   (mapcar #'car (howm-grep "\:agenda\:"
+			    (howm-files-in-directory howm-directory)))))
+
+(define-advice org-agenda (:before (&rest _args))
+  (setq org-agenda-files (my-org-agenda-file-names-in-howm)))
+
+(define-advice org-clock-report (:before (&rest _args))
+  (setq org-agenda-files (my-org-agenda-file-names-in-howm)))
+
 (defconst my-howm-subsubdir-regexp
   (rx (seq "howm/" (= 4 num ) "/" (= 2 num)))
   "Regexp that matches second level of subdirectories in howm,
