@@ -329,6 +329,7 @@
   :config
   (telega-notifications-mode 1)
   (define-key global-map (kbd "C-c t") telega-prefix-map)
+  :hook (telega-chat-mode . telega-completions-setup-capf)
   :defer 't)
 
 (org-babel-do-load-languages
