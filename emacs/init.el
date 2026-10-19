@@ -138,6 +138,9 @@
   (require 'org-fc-hydra)
   (require 'org-fc-algo-fsrs))
 
+(use-package org-srs
+  :custom org-srs-query-directory-file-regexp (rx (seq bos (not (any ".")) (*? anything) ".txt" eos)))
+
 ;; Use C locale for time. Needed for org-pomodoro on windows
 (setq system-time-locale "C")
 
