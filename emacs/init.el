@@ -101,7 +101,7 @@
    like  ~/homw/2024/01/, but with ltximg")
 
 (defconst my-howm-excluded-subdirs-regexp
-  (rx (or ".git" "ltximg"))
+  (rx (or ".git" "ltximg" "auto"))
   "Regexp that matches howm subdirs that I don't need
    like .git .elfeed and ltximg, basically like .gitignore,
    but i don't want to rely on them")
