@@ -58,7 +58,7 @@
 
 (use-package modus-themes
   :init (modus-themes-load-random-light)
-  :when (not (eq window-system nil)))
+  :when (not (null window-system)))
 
 (use-package consult :ensure t)
 
