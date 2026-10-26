@@ -2,40 +2,36 @@
 # hard link to ~/.xsession
 setxkbmap us,by -variant colemak,ru grp:win_space_toggle -option ctrl:nocaps
 
-xrandr --output eDP-1 \
-       --dpi 192 \
-       --scale 1
+# laptop display
+xrandr --output eDP-1 --dpi 192 --scale 1
+
+# LG display
+# xrandr --output DP-2 --auto --output eDP-1 --off
+
+systemctl --user import-environment DISPLAY
 
 if [ -x /usr/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
 	eval $(dbus-launch --sh-syntax --exit-with-x11)  
 fi
-
-env XDG_CONFIG_HOME="$HOME/.config" \
-    XDG_CURRENT_DESKTOP="cwm"
-
     
 
 xrdb ~/.config/X/resources
 
-slstatus -s | dzen2 -fn "Iosevka" &
+slstatus -s | dzen2 -bg '#ffffff' -fg '#7c3192' -fn "Iosevka" &
+
+xwallpaper --daemon --center /home/artsi0m/Pictures/MemesWP.jpg
+
+# picom --backend glx &
+picom --backend xrender & 
 
 
 
-xwallpaper --daemon \
-	   --center \
-	   /home/artsi0m/Pictures/Shapoco/91199411_p0.png
-
-picom --backend glx &
-
-eval $(ssh-agent)
-
-
-
-dunst &
+systemctl --user start dunst &
 
 systemctl --user start xscreensaver &
 
-sleep 5 && systemctl --user start xdg-desktop-portal-gtk.service & # Костыль, хуле
+systemctl --user start xdg-desktop-portal-gtk.service & 
+
 
 
 exec cwm -c ~/.config/cwm/cwmrc
