@@ -153,8 +153,8 @@
              "/usr/share/sounds/freedesktop/stereo/complete.oga")
   :custom
   (org-pomodoro-keep-killed-pomodoro-time 't)
-  (org-pomodoro-length 80)
-  (org-pomodoro-short-break-length 15)
+  (org-pomodoro-length 52)
+  (org-pomodoro-short-break-length 17)
   (org-pomodoro-long-break-length 35)
   (org-pomodoro-format "🍅~%s")
   (org-pomodoro-play-sounds t)
@@ -167,6 +167,7 @@
 (use-package org-pomodoro-third-time
   :vc (:url "git@github.com:telotortium/org-pomodoro-third-time.git")
   :init  (org-pomodoro-third-time-mode)
+  :custom (org-pomodoro-third-time-break-to-work-ratio (/ 1 2.5))
   :ensure t)
 
 (use-package auctex
