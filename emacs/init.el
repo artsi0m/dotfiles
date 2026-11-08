@@ -35,6 +35,12 @@
   (reverse-im-input-methods '("cyrillic-colemak"))
   (reverse-im-cache-file "~/.cache/emacs/reverse-im-cache.el"))
 
+(use-package eat
+  :config
+  (eat-eshell-mode)
+  (setq eshell-visual-commands '()))
+
+(setq initial-buffer-choice 'eshell)
 
 (use-package frames-only-mode
   :bind ("C-x 5 9" . frames-only-mode))
